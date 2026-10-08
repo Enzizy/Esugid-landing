@@ -1,11 +1,1177 @@
 <!doctype html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#091b15"><meta name="description" content="Explore E-sugid, a Flutter Android app and staff dashboard for centralized community communication in Barili."><title>E-SUGID — A Connected Barili</title><link rel="icon" href="media/logo.png"><link rel="stylesheet" href="style.css"></head>
-<body><a class="skip" href="#showcase">Skip to the app</a>
-<header class="header"><a class="brand" href="#intro"><img src="media/logo.png" alt=""><span>E-SUGID<span class="brand-sub">A CONNECTED BARILI</span></span></a><nav aria-label="Main"><a href="#showcase">The app</a><a href="#staff">The dashboard</a><a href="#research">The research</a></nav><div class="header-actions"><button id="motion" class="quiet" aria-pressed="false">Pause motion</button><button id="defense" class="outline" aria-pressed="false">Defense mode</button></div></header>
-<main><section class="hero chapter" id="intro" data-title="Introduction" data-time="0:45"><video id="community-video" class="hero-video" muted playsinline autoplay preload="auto" poster="media/community-poster.png"><source src="media/community.mp4" type="video/mp4"></video><div class="hero-shade"></div><div class="hero-content"><div class="eyebrow"><span class="live-dot"></span> COMMUNITY, CONNECTED.</div><h1>A small town.<br>A closer <em>community.</em></h1><p class="hero-copy">Official updates. Voices heard. Everyday connections.<br>Discover a shared digital space for the people of Barili.</p><div class="hero-actions"><a class="primary" href="#showcase">Step inside E-sugid</a><button class="text-button" data-start-defense>Begin the defense</button></div><p class="hero-context">FLUTTER ANDROID APP <span>+</span> ROLE-BASED ADMIN DASHBOARD</p></div><div class="hero-bottom"><span>DESIGNED AROUND PEOPLE.</span><a href="#showcase">SCROLL TO EXPLORE <span class="scroll-line"></span></a><span>BARILI, CEBU · PHILIPPINES</span></div></section>
-<section class="showcase chapter" id="showcase" data-title="Meet E-sugid" data-time="1:10"><div class="showcase-copy"><span class="eyebrow">01 / THE RESIDENT EXPERIENCE</span><h2>Your community.<br><em>Within reach.</em></h2><p>One Android app brings community information, resident concerns, and local services together.</p><div class="feature-tabs" role="tablist" aria-label="App preview"><button role="tab" aria-selected="true" data-screen="home">Community home</button><button role="tab" aria-selected="false" data-screen="services">Service hub</button><button role="tab" aria-selected="false" data-screen="updates">Official updates</button></div><div class="tab-copy"><span id="screen-number">01 — COMMUNITY HOME</span><p id="screen-description">A familiar place to find community announcements and discover what matters nearby.</p></div><button class="text-button" id="enlarge-phone">View the actual screen</button></div><div class="phone-stage"><div id="phone-canvas" aria-label="Interactive 3D Android phone showing E-sugid" role="img"></div><img id="phone-fallback" class="phone-fallback" src="screens/mobile/03-home-services/home-announcement-overview.jpg" alt="E-sugid community home screen"><div class="phone-caption"><span class="tiny-dot"></span> ACTUAL APP INTERFACE <span>DRAG TO ROTATE</span></div></div></section>
-<div id="more-content"></div></main>
-<footer><a class="brand" href="#intro">E-SUGID</a><p>A connected community starts with a conversation.</p><span>THESIS SHOWCASE · BARILI, CEBU</span></footer>
-<dialog id="screen-dialog"><button class="dialog-close" aria-label="Close image">Close</button><h3 id="dialog-title">App screen</h3><img id="dialog-image" alt=""><p id="dialog-caption"></p></dialog>
-<aside id="defense-bar" hidden aria-label="Defense presentation controls"><button id="prev-chapter">Previous</button><div><span id="chapter-position"></span><strong id="chapter-title"></strong></div><select id="chapter-select" aria-label="Jump to a defense chapter"></select><span id="elapsed">00:00</span><button id="notes-toggle" aria-expanded="false">Presenter notes</button><button id="next-chapter">Next chapter</button></aside><aside id="presenter-notes" hidden></aside>
-<script type="module" src="app.js"></script></body></html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>E-sugid — Thesis Defense</title>
+<meta name="description" content="E-sugid: Design and Development of a Centralized Community Communication and Information Dissemination System — an interactive thesis presentation for Barili, Cebu.">
+<meta name="theme-color" content="#09150F">
+<link rel="icon" href="assets/img/brand/favicon.png">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>
+  // Pick the presentation mode before first paint: ?static=1 / ?calm=1 / ?present=1, stored preference, or OS reduced motion.
+  (function () {
+    var d = document.documentElement, q = new URLSearchParams(location.search), m = null;
+    try { m = localStorage.getItem('esugid.motion'); } catch (e) {}
+    if (q.has('static')) m = 'static'; else if (q.has('calm')) m = 'calm'; else if (q.has('full')) m = 'full';
+    if (!m) m = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'calm' : 'full';
+    d.classList.remove('no-js'); d.classList.add('js'); d.dataset.motion = m;
+    if (q.has('present')) d.dataset.present = '1';
+  })();
+</script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+<symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+<symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="i-play" viewBox="0 0 24 24"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M11 5h10"/><path d="M11 12h10"/><path d="M11 19h10"/><path d="M4 4h1v5"/><path d="M4 9h2"/><path d="M6.5 20H3.4c0-1 2.6-1.925 2.6-3.5a1.5 1.5 0 0 0-2.6-1.02"/></symbol>
+<symbol id="i-library" viewBox="0 0 24 24"><rect width="8" height="18" x="3" y="3" rx="1"/><path d="M7 3v18"/><path d="M20.4 18.9c.2.5-.1 1.1-.6 1.3l-1.9.7c-.5.2-1.1-.1-1.3-.6L11.1 5.1c-.2-.5.1-1.1.6-1.3l1.9-.7c.5-.2 1.1.1 1.3.6Z"/></symbol>
+<symbol id="i-notes" viewBox="0 0 24 24"><path d="M13.4 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7.4"/><path d="M2 6h4"/><path d="M2 10h4"/><path d="M2 14h4"/><path d="M2 18h4"/><path d="M21.378 5.626a1 1 0 1 0-3.004-3.004l-5.01 5.012a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506z"/></symbol>
+<symbol id="i-motion" viewBox="0 0 24 24"><path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/></symbol>
+<symbol id="i-static" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
+<symbol id="i-fullscreen" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></symbol>
+<symbol id="i-monitor" viewBox="0 0 24 24"><path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8"/><path d="M10 19v-3.96 3.15"/><path d="M7 19h5"/><rect width="6" height="10" x="16" y="12" rx="2"/></symbol>
+<symbol id="i-barangay" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+<symbol id="i-landmark" viewBox="0 0 24 24"><path d="M10 18v-7"/><path d="M11.12 2.198a2 2 0 0 1 1.76.006l7.866 3.847c.476.233.31.949-.22.949H3.474c-.53 0-.695-.716-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/></symbol>
+<symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M22 8c0-2.3-.8-4.3-2-6"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/><path d="M4 2C2.8 3.7 2 5.7 2 8"/></symbol>
+<symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/><path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14"/><path d="M8 6v8"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15"/><path d="M9 3.236v15"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m16.24 7.76-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z"/></symbol>
+<symbol id="i-cloud" viewBox="0 0 24 24"><path d="M12 2v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="M20 12h2"/><path d="m19.07 4.93-1.41 1.41"/><path d="M15.947 12.65a4 4 0 0 0-5.925-4.128"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/></symbol>
+<symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></symbol>
+<symbol id="i-heart-hand" viewBox="0 0 24 24"><path d="M11 14h2a2 2 0 0 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 16"/><path d="m14.45 13.39 5.05-4.694C20.196 8 21 6.85 21 5.75a2.75 2.75 0 0 0-4.797-1.837.276.276 0 0 1-.406 0A2.75 2.75 0 0 0 11 5.75c0 1.2.802 2.248 1.5 2.946L16 11.95"/><path d="m2 15 6 6"/><path d="m7 20 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a1 1 0 0 0-2.75-2.91"/></symbol>
+<symbol id="i-store" viewBox="0 0 24 24"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"/><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><circle cx="12" cy="16" r="1"/><rect x="3" y="10" width="18" height="12" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6h4"/></symbol>
+<symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></symbol>
+<symbol id="i-server" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+<symbol id="i-log" viewBox="0 0 24 24"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></symbol>
+<symbol id="i-pending" viewBox="0 0 24 24"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></symbol>
+<symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+<symbol id="i-siren" viewBox="0 0 24 24"><path d="M7 18v-6a5 5 0 1 1 10 0v6"/><path d="M5 21a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M21 12h1"/><path d="M18.5 4.5 18 5"/><path d="M2 12h1"/><path d="M12 2v1"/><path d="m4.929 4.929.707.707"/><path d="M12 12v6"/></symbol>
+<symbol id="i-message" viewBox="0 0 24 24"><path d="M16 10a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 14.286V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/><path d="M20 9a2 2 0 0 1 2 2v10.286a.71.71 0 0 1-1.212.502l-2.202-2.202A2 2 0 0 0 17.172 19H10a2 2 0 0 1-2-2v-1"/></symbol>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.453 15h11.094"/><path d="M8.5 2h7"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z"/><path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12"/><path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17"/></symbol>
+<symbol id="i-zoom" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></symbol>
+<symbol id="i-timer" viewBox="0 0 24 24"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></symbol>
+<symbol id="i-presenter" viewBox="0 0 24 24"><path d="M2 3h20"/><path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"/><path d="m7 21 5-5 5 5"/></symbol>
+<symbol id="i-external" viewBox="0 0 24 24"><path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6"/><path d="m21 3-9 9"/><path d="M15 3h6v6"/></symbol>
+<symbol id="i-help" viewBox="0 0 24 24"><path d="M10 8h.01"/><path d="M12 12h.01"/><path d="M14 8h.01"/><path d="M16 12h.01"/><path d="M18 8h.01"/><path d="M6 8h.01"/><path d="M7 16h10"/><path d="M8 12h.01"/><rect width="20" height="16" x="2" y="4" rx="2"/></symbol>
+<symbol id="i-gavel" viewBox="0 0 24 24"><path d="m14 13-8.381 8.38a1 1 0 0 1-3.001-3l8.384-8.381"/><path d="m16 16 6-6"/><path d="m21.5 10.5-8-8"/><path d="m8 8 6-6"/><path d="m8.5 7.5 8 8"/></symbol>
+<symbol id="i-id" viewBox="0 0 24 24"><path d="M16 10h2"/><path d="M16 14h2"/><path d="M6.17 15a3 3 0 0 1 5.66 0"/><circle cx="9" cy="11" r="2"/><rect x="2" y="5" width="20" height="14" rx="2"/></symbol>
+<symbol id="i-cpu" viewBox="0 0 24 24"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></symbol>
+<symbol id="i-smartphone-up" viewBox="0 0 24 24"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+<symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></symbol>
+<symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"/></symbol>
+<symbol id="i-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></symbol>
+<symbol id="i-building" viewBox="0 0 24 24"><path d="M10 12h4"/><path d="M10 8h4"/><path d="M14 21v-3a2 2 0 0 0-4 0v3"/><path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/></symbol>
+<symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></symbol>
+<symbol id="i-blackout" viewBox="0 0 24 24"><path d="M12 17v4"/><path d="M17 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 1.184-1.826"/><path d="m2 2 20 20"/><path d="M8 21h8"/><path d="M8.656 3H20a2 2 0 0 1 2 2v10a2 2 0 0 1-.293 1.042"/></symbol>
+</svg>
+
+<a class="skip" href="#opening">Skip to content</a>
+
+<!-- The 3D world: a fixed canvas behind the chapters. Decorative; every point it makes is also in the text. -->
+<div id="world" aria-hidden="true">
+  <canvas id="world-canvas"></canvas>
+  <div id="world-labels"></div>
+  <div class="world-scrim"></div>
+</div>
+<div id="tip" role="status" aria-live="polite" hidden></div>
+<p id="world-note" class="world-note" hidden>3D map: Barili's 42 barangay boundaries from the app's PSA&nbsp;2020 dataset. Relief, buildings and connection lines are illustrative.</p>
+
+<!-- Top bar -->
+<header class="topbar" id="topbar">
+  <a class="brand" href="#opening" data-go="opening">
+    <img src="assets/img/brand/esugid-logo-192.png" alt="" width="40" height="40">
+    <span><b>E-sugid</b><small>Thesis defense</small></span>
+  </a>
+  <nav class="rail" id="rail" aria-label="Chapters"></nav>
+  <div class="tools">
+    <button class="tool" id="btn-present" type="button" title="Start defense mode (P)"><svg><use href="#i-presenter"/></svg><span>Present</span></button>
+    <button class="tool" id="btn-chapters" type="button" title="Chapters (G)"><svg><use href="#i-list"/></svg><span>Chapters</span></button>
+    <button class="tool" id="btn-library" type="button" title="Feature library for Q&amp;A (L)"><svg><use href="#i-library"/></svg><span>Library</span></button>
+    <button class="tool" id="btn-motion" type="button" title="Motion: Full / Calm / Static (M)"><svg><use href="#i-motion"/></svg><span id="motion-label">Full motion</span></button>
+  </div>
+</header>
+
+<main id="deck">
+
+<!-- ═════════ 00 OPENING ═════════ -->
+<section class="chapter chapter--hero" id="opening" data-title="Opening" data-short="Opening" data-time="30">
+  <div class="stage">
+    <div class="hero">
+      <p class="eyebrow"><span class="dot"></span>Thesis defense · Barili, Cebu</p>
+      <h1 class="hero-title" aria-label="E-sugid"><span class="ht-e">E</span><span class="ht-dash">-</span><span class="ht-rest">sugid</span></h1>
+      <p class="hero-thesis">Design and Development of a Centralized Community Communication and Information Dissemination System</p>
+      <p class="hero-word"><i>sugid</i> <span>(Cebuano)</span> — to tell, to report.</p>
+      <div class="hero-team pending-line"><svg><use href="#i-pending"/></svg>Researchers · Adviser · Program &amp; institution · Defense date — <em>to be added</em></div>
+      <div class="hero-actions">
+        <button class="btn btn--primary" type="button" data-action="begin"><svg><use href="#i-play"/></svg>Begin presentation</button>
+        <a class="btn btn--ghost" href="#problem" data-go="problem">Explore at your own pace<svg><use href="#i-arrow-right"/></svg></a>
+      </div>
+      <p class="hero-keys"><kbd>→</kbd> next <kbd>←</kbd> back <kbd>G</kbd> chapters <kbd>N</kbd> notes <kbd>?</kbd> all shortcuts</p>
+    </div>
+    <div class="beats">
+      <article class="beat" data-shot="hero"><div class="copy sr-only">Opening: the thesis title.</div></article>
+    </div>
+    <div class="hero-foot">
+      <span>A Flutter Android app for residents</span><i></i><span>A role-based web dashboard for staff</span><i></i><span>One shared record</span>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Open (≈30 s).</b> Greet the panel and introduce the team. Read the full title once.</p>
+    <p>"E-sugid comes from <i>sugid</i> — to tell or report. The system is a shared place where Barili's offices tell residents what they need to know, and residents tell the offices what needs attention."</p>
+    <p>The island behind the title is drawn from the same barangay boundary file the app uses — 42 barangays.</p>
+  </template>
+</section>
+
+<!-- ═════════ 01 PROBLEM ═════════ -->
+<section class="chapter" id="problem" data-title="Why this system" data-short="Problem" data-time="60">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">01</span><h2>Why this system</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="problem-apart">
+        <div class="copy">
+          <p class="kicker">Context</p>
+          <h3>Barili is 42 barangays — and many conversations.</h3>
+          <p>Official notices, safety information and residents' concerns move among <b>residents</b>, <b>barangay offices</b>, <b>municipal departments</b> and <b>local organizations</b>.</p>
+          <p class="fine">Each tile on the map is one barangay, drawn from its PSA 2020 boundary.</p>
+        </div>
+        <div class="ev ev--world">
+          <ul class="actor-ring" aria-label="Who communicates">
+            <li><svg><use href="#i-users"/></svg>Residents</li>
+            <li><svg><use href="#i-barangay"/></svg>42 barangay offices</li>
+            <li><svg><use href="#i-landmark"/></svg>Municipal departments</li>
+            <li><svg><use href="#i-building"/></svg>Local organizations</li>
+          </ul>
+        </div>
+      </article>
+      <article class="beat" data-shot="problem-channels">
+        <div class="copy">
+          <p class="kicker">The design problem <span class="tag tag--draft">Draft · for academic review</span></p>
+          <h3>When updates and follow-ups travel through separate channels…</h3>
+          <ul class="ticks">
+            <li>residents may have difficulty <b>finding relevant updates</b> and <b>tracking their concerns</b>;</li>
+            <li>officials may have difficulty <b>keeping a consistent record</b> of communication.</li>
+          </ul>
+          <p class="pending-line"><svg><use href="#i-pending"/></svg>Support with your actual requirements evidence — interviews, survey or approved manuscript.</p>
+        </div>
+        <div class="ev ev--world"></div>
+      </article>
+      <article class="beat" data-shot="problem-joined">
+        <div class="copy">
+          <p class="kicker">The response</p>
+          <h3>…E-sugid brings them into one shared system.</h3>
+          <p>A resident <b>Android app</b> and a role-based <b>web dashboard</b> share one backend — so announcements, concerns and their updates live in one consistent record.</p>
+          <p class="fine">The drifting map is a visual metaphor, not research evidence.</p>
+        </div>
+        <div class="ev ev--world"></div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Problem (≈1 min).</b> Establish the setting: one municipality, 42 barangays, several kinds of offices.</p>
+    <p>State the problem from your approved manuscript. The wording on screen is the team's draft — replace it with the final statement and cite your requirements evidence (interviews / survey / observation).</p>
+    <p>Beat 3: the tiles join — "one shared system".</p>
+  </template>
+</section>
+
+<!-- ═════════ 02 OBJECTIVES ═════════ -->
+<section class="chapter" id="objectives" data-title="What the study set out to do" data-short="Objectives" data-time="50">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">02</span><h2>What the study set out to do</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="objectives-system">
+        <div class="copy">
+          <p class="kicker">General objective <span class="tag tag--draft">Draft wording</span></p>
+          <p class="lede">To design and develop <b>E-sugid</b>, a centralized community communication and information dissemination system — a <b>Flutter-based Android application</b> and a <b>role-based web administration dashboard</b> — to support official information access, targeted announcements, resident feedback, and coordinated communication among residents and authorized stakeholders in Barili.</p>
+        </div>
+        <div class="ev">
+          <div class="system-card">
+            <div class="sys-node sys-node--app"><svg><use href="#i-phone"/></svg><b>Resident app</b><span>Flutter · Android</span><small>Residents</small></div>
+            <div class="sys-link"><i></i><span>one shared record</span><i></i></div>
+            <div class="sys-node sys-node--core"><svg><use href="#i-database"/></svg><b>Shared backend</b><span>Firebase</span><small>Auth · Firestore · Storage · Functions · Messaging</small></div>
+            <div class="sys-link"><i></i><span>scoped by role</span><i></i></div>
+            <div class="sys-node sys-node--web"><svg><use href="#i-monitor"/></svg><b>Staff dashboard</b><span>Web</span><small>Barangay officials · Municipal departments · Organizations · LGU IT</small></div>
+          </div>
+        </div>
+      </article>
+      <article class="beat" data-shot="objectives-list">
+        <div class="copy">
+          <p class="kicker">Specific objectives <span class="tag tag--draft">Draft · align with manuscript</span></p>
+          <h3>Seven objectives, each answered by a chapter.</h3>
+          <p>Select an objective to jump to where it is demonstrated. Objectives 1 and 7 depend on the team's actual requirements and evaluation evidence.</p>
+        </div>
+        <div class="ev">
+          <ol class="objectives">
+            <li><a href="#problem" data-go="problem"><b>Define the requirements</b> for information access, official publishing, resident feedback and staff communication.<span class="tag tag--pending">Evidence pending</span></a></li>
+            <li><a href="#architecture" data-go="architecture"><b>Design the architecture and interfaces</b> — Android app, staff dashboard, shared backend.<span class="go">Ch. 11</span></a></li>
+            <li><a href="#announce" data-go="announce"><b>Develop centralized dissemination</b> — announcements and safety notices for intended audiences, with calendar and saved reading.<span class="go">Ch. 5–6</span></a></li>
+            <li><a href="#concern" data-go="concern"><b>Implement two-way communication</b> — concerns to the right office with status updates; complaints kept separate.<span class="go">Ch. 4</span></a></li>
+            <li><a href="#staff" data-go="staff"><b>Implement verification and role-based administration</b> with scoped access.<span class="go">Ch. 3 · 10</span></a></li>
+            <li><a href="#explore" data-go="explore"><b>Provide supporting information and guidance</b> — services hub, local tools, assistant navigation.<span class="go">Ch. 7–9</span></a></li>
+            <li><a href="#evaluation" data-go="evaluation"><b>Evaluate the system</b> for functionality, usability, audience communication and role access.<span class="tag tag--pending">Results pending</span></a></li>
+          </ol>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Objectives (≈50 s).</b> Read the general objective in your own words — don't read the whole slide.</p>
+    <p>Name the two clients and the shared backend. Then walk the seven objectives quickly; say which chapter answers each.</p>
+    <p>Be upfront: objective 1 (requirements) and 7 (evaluation) rest on evidence that must come from your manuscript.</p>
+  </template>
+</section>
+
+<!-- ═════════ 03 RESIDENT ═════════ -->
+<section class="chapter" id="resident" data-title="A resident enters" data-short="Resident" data-time="45">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">03</span><h2>A resident enters</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="resident-home">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-phone"/></svg>Resident app · Home</p>
+          <h3>Official updates come first.</h3>
+          <ol class="hs-list">
+            <li data-hs="1"><b>View My Barangay</b> — the resident's own barangay page.</li>
+            <li data-hs="2"><b>Notices, Advisories, Events</b> — filter the feed by type.</li>
+            <li data-hs="3"><b>Verified publishers</b> — each post shows who issued it.</li>
+            <li data-hs="4"><b>Assistant</b> — always one tap away.</li>
+          </ol>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="home">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/home-announcement-overview.jpg" width="1080" height="2460" alt="E-SUGID resident home screen: Barili Official Center header, View My Barangay button, announcement category filters and latest announcements from verified publishers.">
+              <span class="hs" style="--x:40%;--y:17%">1</span><span class="hs" style="--x:57%;--y:25.7%">2</span><span class="hs" style="--x:50.5%;--y:39.8%">3</span><span class="hs" style="--x:87%;--y:85.5%">4</span>
+            </div></div>
+            <figcaption><b>Resident app</b> · Home</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="resident-services">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-phone"/></svg>Resident app · Services</p>
+          <h3>Every community service in one hub.</h3>
+          <ol class="hs-list">
+            <li data-hs="1"><b>Emergency Center &amp; Safety Alerts</b></li>
+            <li data-hs="2"><b>Bayanihan Works</b> and <b>Local Market</b></li>
+            <li data-hs="3"><b>Municipal Officials</b></li>
+            <li data-hs="4"><b>Town Map · Town Calendar · Barili Weather · Explore Barili</b></li>
+          </ol>
+          <p class="fine">The centre <b>+ Concern</b> button is on every main tab.</p>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="services">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/services-hub.jpg" width="1080" height="2460" alt="Barili Services hub: Emergency Center and Safety Alerts, Bayanihan Works, Local Market, Municipal Officials, Town Map, Town Calendar, Barili Weather and Explore Barili." loading="lazy">
+              <span class="hs" style="--x:50%;--y:28%">1</span><span class="hs" style="--x:50%;--y:49%">2</span><span class="hs" style="--x:50%;--y:69.5%">3</span><span class="hs" style="--x:50%;--y:83%">4</span>
+            </div></div>
+            <figcaption><b>Resident app</b> · Services</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="resident-verify">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-monitor"/></svg>Staff dashboard · Resident Verification</p>
+          <h3>Residents are verified before they take part.</h3>
+          <p>Residents submit verification in the app; authorized barangay staff review it in the dashboard.</p>
+          <p class="capture"><svg><use href="#i-info"/></svg>This capture shows an <b>empty Pending queue</b>. Proof-document review and approval are not shown.</p>
+          <p class="fine">Sign-in, registration with e-mail OTP and password recovery are in the app. The captured login screen is omitted because it shows a personal e-mail address.</p>
+        </div>
+        <div class="ev ev--wide">
+          <figure class="device browser" data-screen="a-verification">
+            <div class="browser-shell"><div class="browser-bar"><i></i><i></i><i></i><span>E-SUGID staff dashboard · Barangay Captain</span></div><div class="browser-screen">
+              <img src="assets/img/screens/admin/resident-verification-empty-pending-queue.png" width="1439" height="761" alt="Resident Verification page with Pending, Verified, Needs Attention and Rejected counters, and an empty pending queue." loading="lazy">
+            </div></div>
+            <figcaption><b>Staff dashboard</b> · Resident Verification</figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Resident enters (≈45 s).</b> Home: point to the four numbered areas. Emphasize "official, verified publishers".</p>
+    <p>Services: everything else lives here — we'll visit them in order.</p>
+    <p>Verification: residents are verified by their barangay. Our capture has an empty queue — say so plainly.</p>
+  </template>
+</section>
+
+<!-- ═════════ 04 CONCERN ═════════ -->
+<section class="chapter" id="concern" data-title="A concern becomes a case" data-short="Concerns" data-time="120">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">04</span><h2>A concern becomes a case</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="concern-start">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-phone"/></svg>Resident app · Concern Center</p>
+          <h3>Two doors: public concerns, private complaints.</h3>
+          <blockquote>“Report public problems like roads, water, or trash. Report private problems with a neighbor or person.”<cite>— Concern Center</cite></blockquote>
+          <ol class="hs-list">
+            <li data-hs="1"><b>Start Filing Concern</b> — this chapter's journey.</li>
+            <li data-hs="2"><b>File a Complaint</b> — a separate, confidential workflow (step 6).</li>
+          </ol>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="concern-center">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/concern-center.jpg" width="1080" height="2460" alt="Concern Center: My Activity and My Barangay tabs, the prompt How can we help?, and buttons Start Filing Concern and File a Complaint." loading="lazy">
+              <span class="hs" style="--x:50%;--y:71.6%">1</span><span class="hs" style="--x:50%;--y:78.9%">2</span>
+            </div></div>
+            <figcaption><b>Resident app</b> · Concern Center</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="concern-route">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-route"/></svg>Step 1 of the concern form</p>
+          <h3>The resident chooses who should handle it.</h3>
+          <div class="stepper route-picker" data-stepper="route" role="tablist" aria-label="Recipient type">
+            <button type="button" role="tab" data-step="barangay"><svg><use href="#i-barangay"/></svg>Barangay</button>
+            <button type="button" role="tab" data-step="lgu"><svg><use href="#i-landmark"/></svg>LGU Department</button>
+            <button type="button" role="tab" data-step="org"><svg><use href="#i-users"/></svg>Organization</button>
+          </div>
+          <div class="step-panels" data-panels="route">
+            <p data-panel="barangay">Goes to the <b>barangay office</b> — in our example, Barangay Vito.</p>
+            <p data-panel="lgu">Goes to the responsible <b>municipal department</b> of the LGU.</p>
+            <p data-panel="org">Goes to an approved <b>organization</b> that handles that kind of concern.</p>
+          </div>
+          <p class="fine">Next steps add details, photos and location; the form can be saved as a draft. Lines on the map illustrate the choice — they are not live data.</p>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="concern-recipient">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/select-recipient-type.jpg" width="1080" height="2460" alt="File a Concern, step one of four: Who should handle this concern? Options Barangay, LGU Department and Organization, with Save Draft and Continue." loading="lazy">
+              <button type="button" class="hs hs--btn" style="--x:50%;--y:42.6%" data-route-hs="barangay" aria-label="Barangay">1</button><button type="button" class="hs hs--btn" style="--x:50%;--y:50.8%" data-route-hs="lgu" aria-label="LGU Department">2</button><button type="button" class="hs hs--btn" style="--x:50%;--y:59.2%" data-route-hs="org" aria-label="Organization">3</button>
+            </div></div>
+            <figcaption><b>Resident app</b> · File a Concern, step 1 <span class="cap-note">recipient not yet selected in this capture</span></figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="concern-track">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-phone"/></svg>Resident app · My Activity &amp; Barangay Board</p>
+          <h3>The resident can follow it.</h3>
+          <ul class="ticks">
+            <li><b>My Concerns</b> lists the resident's cases as Active or Resolved, with status badges such as <span class="status s-progress">In Progress</span>.</li>
+            <li><b>Unfinished drafts</b> stay on the device until submitted.</li>
+            <li>The <b>Barangay Board</b> shows public reports in the barangay — so neighbors can see an issue is already reported.</li>
+          </ul>
+        </div>
+        <div class="ev ev--right ev--pair">
+          <figure class="device phone" data-screen="concern-mine">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/my-concerns-in-progress.jpg" width="1080" height="2460" alt="My Activity, My Concerns tab: unfinished drafts counter and two concerns marked In Progress with Track links." loading="lazy">
+            </div></div>
+            <figcaption><b>My Concerns</b></figcaption>
+          </figure>
+          <figure class="device phone" data-screen="concern-board">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/barangay-public-reports.jpg" width="1080" height="2460" alt="Barangay Board: public reports in Barangay Vito, with In Progress badges and report counts." loading="lazy">
+            </div></div>
+            <figcaption><b>Barangay Board</b></figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="concern-staff">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-monitor"/></svg>Staff dashboard · Concerns</p>
+          <h3>The receiving office sees it in its queue.</h3>
+          <ol class="hs-list">
+            <li data-hs="1"><b>Status tabs</b> — Active · In Progress · Awaiting Information · Resolved.</li>
+            <li data-hs="2"><b>By category</b>, with share of reports and a View action.</li>
+            <li data-hs="3"><b>Filter</b> and <b>Download</b> for records.</li>
+          </ol>
+          <p class="fine">Barangay staff see concerns sent to their own barangay. Counts are records from testing, not evaluation results.</p>
+        </div>
+        <div class="ev ev--wide">
+          <figure class="device browser" data-screen="a-concerns">
+            <div class="browser-shell"><div class="browser-bar"><i></i><i></i><i></i><span>E-SUGID staff dashboard · Barangay Captain</span></div><div class="browser-screen">
+              <img src="assets/img/screens/admin/concerns-active-category-summary.png" width="1424" height="761" alt="Staff Concerns page: Resident Reports with status tabs Active, In Progress, Awaiting Information and Resolved, and a category table with View action." loading="lazy">
+              <span class="hs" style="--x:31.5%;--y:29.6%">1</span><span class="hs" style="--x:21%;--y:48.9%">2</span><span class="hs" style="--x:85%;--y:22.4%">3</span>
+            </div></div>
+            <figcaption><b>Staff dashboard</b> · Concerns</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="concern-lifecycle">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-log"/></svg>Case lifecycle</p>
+          <h3>Every change becomes part of the record.</h3>
+          <p>Staff move the case forward. If they need more details, it waits for the resident; the resident's reply returns it to <b>In Progress</b>. Not every case passes through every stage.</p>
+          <p>Key actions appear in <b>System Logs</b> — for example <i>Concern submitted</i> and <i>Concern resolved</i>.</p>
+          <p class="pending-line"><svg><use href="#i-pending"/></svg>Still to capture: one matched case — submission → staff update → resident timeline → resolution.</p>
+        </div>
+        <div class="ev ev--stack">
+          <div class="status-model" aria-label="Concern status model">
+            <div class="sm-row">
+              <span class="sm-node s-active">Active</span><span class="sm-arrow"></span>
+              <span class="sm-node s-progress">In Progress</span><span class="sm-arrow"></span>
+              <span class="sm-node s-resolved">Resolved</span>
+            </div>
+            <div class="sm-branch">
+              <span class="sm-curve sm-curve--down">staff request details</span>
+              <span class="sm-node s-awaiting">Awaiting Information</span>
+              <span class="sm-curve sm-curve--up">resident replies</span>
+            </div>
+          </div>
+          <figure class="device browser browser--short" data-screen="a-logs">
+            <div class="browser-shell"><div class="browser-bar"><i></i><i></i><i></i><span>System Logs</span></div><div class="browser-screen">
+              <img src="assets/img/screens/admin/barangay-system-logs.png" width="1439" height="763" alt="System Logs: operations log entries including Concern resolved, Concern submitted, Resident verified and Announcement published." loading="lazy">
+            </div></div>
+            <figcaption><b>Staff dashboard</b> · System Logs</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="concern-complaint">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-lock"/></svg>Resident app · File a Complaint</p>
+          <h3>Private complaints stay separate.</h3>
+          <blockquote>“Only you and barangay officials can see this complaint. The other person will not see your report in the app.”<cite>— Complaint form</cite></blockquote>
+          <p>Staff handle complaints in their own queue, with stages such as <i>To Review</i>, <i>Waiting for Reply</i>, <i>Hearings</i> and <i>Closed</i>.</p>
+          <p class="fine"><svg><use href="#i-eye-off"/></svg>The staff complaint capture is withheld because it shows names in a dispute.</p>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="complaint-form">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/complaint-form.jpg" width="1080" height="2460" alt="File a Complaint form: Private and Safe confidentiality notice, who is this about, and what happened with type, date and time, location and description." loading="lazy">
+            </div></div>
+            <figcaption><b>Resident app</b> · File a Complaint <span class="cap-note">empty form</span></figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>The core journey (≈2 min).</b> This is the main contribution — slow down here.</p>
+    <p>1 · Two doors: public concern vs private complaint. 2 · Recipient choice — press → to cycle Barangay / LGU Department / Organization and watch the map route. 3 · The resident tracks it; neighbors see public reports on the Barangay Board.</p>
+    <p>4 · Staff queue by status and category. 5 · Status model: Awaiting Information is a branch, not a mandatory stage. Logs show the events. 6 · Complaints are confidential and separate.</p>
+    <p>Say clearly that a single matched end-to-end case capture is still pending (if not yet captured).</p>
+  </template>
+</section>
+
+<!-- ═════════ 05 ANNOUNCEMENTS ═════════ -->
+<section class="chapter" id="announce" data-title="Information reaches the right people" data-short="Announcements" data-time="50">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">05</span><h2>Information reaches the right people</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="announce-scope">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-megaphone"/></svg>Staff dashboard · Announcements</p>
+          <h3>Every announcement has an intended audience.</h3>
+          <p>Two published rows from the capture — select one to see its reach:</p>
+          <div class="stepper scope-picker" data-stepper="scope" role="tablist" aria-label="Announcement audience">
+            <button type="button" role="tab" data-step="vito">
+              <span class="sp-title">Sports Activity</span>
+              <span class="sp-meta"><svg><use href="#i-users"/></svg>Recipients: <b>Vito</b></span>
+              <span class="sp-from">Barangay Vito · Barangay Captain</span>
+            </button>
+            <button type="button" role="tab" data-step="all">
+              <span class="sp-title">Agriculture Department Advisory</span>
+              <span class="sp-meta"><svg><use href="#i-map"/></svg>Recipients: <b>All Barangays</b></span>
+              <span class="sp-from">LGU Department of Agriculture-Barili</span>
+            </button>
+          </div>
+          <p class="fine">Staff publish notices, advisories and events now or on a schedule, for the audience their role allows.</p>
+        </div>
+        <div class="ev ev--wide ev--low">
+          <figure class="device browser browser--rows" data-screen="a-announcements">
+            <div class="browser-shell"><div class="browser-bar"><i></i><i></i><i></i><span>E-SUGID staff dashboard · Barangay Captain</span></div><div class="browser-screen">
+              <img src="assets/img/screens/admin/announcements-published-list.png" width="1424" height="761" alt="Staff Announcements page: counters for community notices, public advisories and events; published list with recipients Vito or All Barangays, dates, senders and status." loading="lazy">
+              <span class="hs hs--ring" data-scope-hs="vito" style="--x:37.5%;--y:46.6%"></span><span class="hs hs--ring" data-scope-hs="all" style="--x:40%;--y:69.6%"></span>
+            </div></div>
+            <figcaption><b>Staff dashboard</b> · Announcements</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="announce-feeds">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-phone"/></svg>Resident app · Updates &amp; My Barangay</p>
+          <h3>Residents find it where they look.</h3>
+          <p>The same <b>Sports Activity</b> post appears in the community <b>Updates</b> feed and in <b>Barangay Vito's verified feed</b>. Residents can search, filter by type and bookmark.</p>
+          <p class="fine">These stills show the feeds; they do not by themselves establish notification delivery.</p>
+        </div>
+        <div class="ev ev--right ev--pair">
+          <figure class="device phone" data-screen="updates-feed">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/community-updates-feed.jpg" width="1080" height="2460" alt="Community Updates feed with search, Notices, Advisories and Events filters, Private Organizations entry, and posts from Barangay Vito, LGU Department and CTU." loading="lazy">
+            </div></div>
+            <figcaption><b>Updates</b></figcaption>
+          </figure>
+          <figure class="device phone" data-screen="barangay-feed">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/my-barangay-announcements.jpg" width="1080" height="2460" alt="My Barangay: Barangay Vito verified feed with search, category filters and announcements including Sports Activity." loading="lazy">
+            </div></div>
+            <figcaption><b>My Barangay</b></figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="announce-calendar">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-calendar"/></svg>Resident app · Community Calendar</p>
+          <h3>Events become dates.</h3>
+          <p>The calendar shows scheduled community activities and what's <b>coming up</b>. In the source, event announcements are synced to the calendar by a Cloud Function.</p>
+          <p class="fine">Also in the source, not captured here: saving announcements to read later, including offline reading of saved items.</p>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="calendar">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/calendar-upcoming-event.jpg" width="1080" height="2460" alt="Community Calendar for October 2026 with no activities on the selected day and a Coming up event card." loading="lazy">
+            </div></div>
+            <figcaption><b>Resident app</b> · Community Calendar</figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Targeted dissemination (≈50 s).</b> The audience is part of every announcement. Press → to switch between the two real rows: "Vito" lights one barangay; "All Barangays" reaches all 42.</p>
+    <p>Then show the resident side: the same Sports Activity post in Updates and My Barangay. Calendar: events become dates.</p>
+  </template>
+</section>
+
+<!-- ═════════ 06 SAFETY ═════════ -->
+<section class="chapter" id="safety" data-title="Safety and coordination" data-short="Safety" data-time="50">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">06</span><h2>Safety and coordination</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="safety-calm">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-shield"/></svg>Resident app · Emergency Center</p>
+          <h3>Safety information has its own place.</h3>
+          <p>The Emergency Center shows active alerts and safety advisories — here in its normal <b>all-clear</b> state — with direct access to emergency hotlines.</p>
+          <p class="capture"><svg><use href="#i-info"/></svg>No incident is shown in this capture.</p>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="emergency-center">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/emergency-center-all-clear.jpg" width="1080" height="2460" alt="Emergency Center with an emergency hotlines entry, Current and History tabs, and an All clear, normal safety status message." loading="lazy">
+            </div></div>
+            <figcaption><b>Resident app</b> · Emergency Center</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="safety-alert">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-siren"/></svg>Staff dashboard · Send Emergency Alert</p>
+          <h3>Staff compose an alert in three steps.</h3>
+          <div class="stepper wizard" data-stepper="alert" role="tablist" aria-label="Alert wizard step">
+            <button type="button" role="tab" data-step="1"><b>1</b>Emergency type</button>
+            <button type="button" role="tab" data-step="2"><b>2</b>Alert message</button>
+            <button type="button" role="tab" data-step="3"><b>3</b>Audience &amp; schedule</button>
+          </div>
+          <div class="step-panels" data-panels="alert">
+            <p data-panel="1">Storm, Flood, Fire, Medical, Security, Road hazard, Utility or Other.</p>
+            <p data-panel="2">Title, details, safety action, and optional evacuation center and hotline.</p>
+            <p data-panel="3">Start and end time, and the audience: <q>Registered residents of Barangay Vito will receive this alert.</q> An emergency broadcast sends phone notifications with an alert sound.</p>
+          </div>
+          <p class="fine">Wizard captures only — final review, publication and delivery were not captured.</p>
+        </div>
+        <div class="ev ev--wide ev--low">
+          <figure class="device browser" data-screen="a-alert-1" data-step-screen="alert">
+            <div class="browser-shell"><div class="browser-bar"><i></i><i></i><i></i><span>E-SUGID staff dashboard · Emergencies</span></div><div class="browser-screen browser-screen--swap">
+              <img data-panel="1" data-screen="a-alert-1" src="assets/img/screens/admin/alert-editor-step-01-category.png" width="1439" height="764" alt="Send Emergency Alert, step 1: select emergency category, Storm selected." loading="lazy">
+              <img data-panel="2" data-screen="a-alert-2" src="assets/img/screens/admin/alert-editor-step-02-message.png" width="1439" height="764" alt="Send Emergency Alert, step 2: alert title, emergency details, safety action, evacuation center and emergency hotline fields." loading="lazy">
+              <img data-panel="3" data-screen="a-alert-3" src="assets/img/screens/admin/alert-editor-step-03-audience-schedule.png" width="1439" height="764" alt="Send Emergency Alert, step 3: alert start and end, Barangay Vito audience, emergency broadcast, and Review alert." loading="lazy">
+              <span class="hs hs--ring" data-panel="3" style="--x:50%;--y:59.2%"></span>
+            </div></div>
+            <figcaption><b>Staff dashboard</b> · Send Emergency Alert</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="safety-hotlines">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-phone"/></svg>Resident app · Emergency Hotlines</p>
+          <h3>Help is one tap away.</h3>
+          <p>A hotline directory: the national <b>911</b> hotline and local agencies such as <b>MDRRMO</b>, <b>BFP</b> and <b>PNP</b>, each with call and detail actions.</p>
+          <p class="fine">A screenshot does not verify that each number is current. Also in the source, not captured: resident emergency reports and private organization-to-organization dispatch.</p>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="hotlines">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/emergency-hotlines.jpg" width="1080" height="2460" alt="Emergency Hotlines: National Unified Emergency Hotline 911, Barili MDRRMO Rescue, Barili Fire Station and Barili Municipal Police Station with call buttons." loading="lazy">
+            </div></div>
+            <figcaption><b>Resident app</b> · Emergency Hotlines</figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Safety (≈50 s).</b> Start calm: the resident's Emergency Center in all-clear state.</p>
+    <p>Alert wizard: press → through steps 1–3. On step 3 the map pulses over Barangay Vito — the captured audience. Say that publication and delivery were not captured.</p>
+    <p>Hotlines: 911 + local agencies, one-tap call.</p>
+  </template>
+</section>
+
+<!-- ═════════ 07 COMMUNITY ═════════ -->
+<section class="chapter" id="community" data-title="Neighbors and livelihoods" data-short="Community" data-time="60">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">07</span><h2>Neighbors and livelihoods</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="community-bayanihan">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-heart-hand"/></svg>Resident app · Bayanihan Works</p>
+          <h3>Neighbors ask for help — and offer it.</h3>
+          <p>Help requests by category — <i>Errands</i>, <i>Repairs</i>, <i>Farming</i> and more — show how many helpers are needed and roughly how far away. Residents respond with <b>I can help</b> or post their own with <b>Ask for Help</b>.</p>
+          <p class="fine">Offers, acceptance, messaging and completion are in the source; this capture shows the request feed.</p>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="bayanihan">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/help-requests-feed.jpg" width="1080" height="2460" alt="Bayanihan Works help requests feed with search, categories, helper counts, I can help and Ask for Help buttons." loading="lazy">
+            </div></div>
+            <figcaption><b>Resident app</b> · Bayanihan Works</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="community-market">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-store"/></svg>Resident app · Local Market</p>
+          <h3>Local produce finds local buyers.</h3>
+          <p>Listings show category, price per unit and availability. Buyers tap <b>I'm interested</b>; sellers use <b>Sell an Item</b>.</p>
+          <p class="fine">Coordination only — the app does not process payments.</p>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="market">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/market-listings-feed.jpg" width="1080" height="2460" alt="Local Market showcase with categories Farm Produce, Livestock, Plants, Handmade and Tools, and a listing priced per kilogram with an I'm Interested button." loading="lazy">
+            </div></div>
+            <figcaption><b>Resident app</b> · Local Market</figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Community (≈1 min).</b> These support the main argument: the same verified community also helps itself.</p>
+    <p>Bayanihan: request → offer → coordination. Market: listing → interest. No payments.</p>
+  </template>
+</section>
+
+<!-- ═════════ 08 EXPLORE ═════════ -->
+<section class="chapter" id="explore" data-title="Explore the municipality" data-short="Explore" data-time="45">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">08</span><h2>Explore the municipality</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="explore-map">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-map"/></svg>Resident app · Barangay Map</p>
+          <h3>The app knows Barili's barangays.</h3>
+          <p>The map works with Barili's barangay boundaries — the <b>same PSA-derived file</b> this website uses to draw its 3D Barili.</p>
+          <p class="try"><svg><use href="#i-pin"/></svg>Hover or tap a barangay on the 3D map to see its name and area.</p>
+        </div>
+        <div class="ev ev--right">
+          <figure class="device phone" data-screen="map">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/barangay-map-current-location.jpg" width="1080" height="2460" alt="Barangay Map with search, barangay and place category filters, and a You are here marker with the current location panel." loading="lazy">
+            </div></div>
+            <figcaption><b>Resident app</b> · Barangay Map</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="explore-falls">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-compass"/></svg>Resident app · Explore Barili</p>
+          <h3>Places to visit — and how to get there.</h3>
+          <p>Destinations such as <b>Mantayupan Falls</b> in Campangga, with navigation modes <b>Car</b>, <b>Moto</b> and <b>Walk</b> and the remaining distance and time.</p>
+          <p class="fine">A still does not prove route accuracy or live tracking. The line on the 3D map is illustrative.</p>
+        </div>
+        <div class="ev ev--right ev--pair">
+          <figure class="device phone" data-screen="explore">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/explore-barili-destinations.jpg" width="1080" height="2460" alt="Explore Barili destinations with Nature, Beaches and Food and Dining filters; Mantayupan Falls in Campangga." loading="lazy">
+            </div></div>
+            <figcaption><b>Explore Barili</b></figcaption>
+          </figure>
+          <figure class="device phone" data-screen="navigation">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/mantayupan-motorcycle-navigation.jpg" width="1080" height="2460" alt="Navigation to Mantayupan Falls with Moto selected, a route line, Head southeast instruction, 8.1 km remaining and 15 minutes." loading="lazy">
+            </div></div>
+            <figcaption><b>Navigation</b></figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="explore-context">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-cloud"/></svg>Resident app · Weather &amp; Officials</p>
+          <h3>Local context, close at hand.</h3>
+          <p><b>Barili Weather</b> shows current conditions and an hourly forecast (data source in the code: Open-Meteo). <b>Municipal Officials</b> lists the mayor, vice mayor and council members.</p>
+          <p class="fine">Captured weather is historical, and the app is not a weather-warning system. Confirm officeholders before discussing names.</p>
+        </div>
+        <div class="ev ev--right ev--pair">
+          <figure class="device phone" data-screen="weather">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/current-weather-and-forecast.jpg" width="1080" height="2460" alt="Barili Weather: 31 degrees overcast, hourly forecast, humidity, wind speed, precipitation and visibility." loading="lazy">
+            </div></div>
+            <figcaption><b>Barili Weather</b></figcaption>
+          </figure>
+          <figure class="device phone" data-screen="officials">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/municipal-officials.jpg" width="1080" height="2460" alt="Municipal Officials directory with mayor, vice mayor and Sangguniang Bayan members." loading="lazy">
+            </div></div>
+            <figcaption><b>Municipal Officials</b></figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Explore (≈45 s).</b> Invite the panel to notice the map they've been watching is the app's own boundary data. Hover a barangay.</p>
+    <p>Explore Barili → Mantayupan Falls → navigation modes. Weather and officials give local context.</p>
+  </template>
+</section>
+
+<!-- ═════════ 09 ASSISTANT ═════════ -->
+<section class="chapter" id="assistant" data-title="Guidance through the assistant" data-short="Assistant" data-time="50">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">09</span><h2>Guidance through the assistant</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="assistant-chat">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-sparkles"/></svg>E-SUGID Assistant · Replay</p>
+          <h3>Ask, and the assistant shows the way.</h3>
+          <p>Answers can carry a button that <b>opens the right screen</b>. Try it here — the buttons move this presentation the way the app moves the resident.</p>
+          <div class="stepper chips" data-stepper="chat" role="tablist" aria-label="Quick inquiries">
+            <button type="button" role="tab" data-step="about">What is E-SUGID?</button>
+            <button type="button" role="tab" data-step="concern">Can I submit a concern here?</button>
+            <button type="button" role="tab" data-step="hotlines">Where can I find the hotlines?</button>
+          </div>
+          <p class="fine">Answer text is the app's own (English). The first answer is quoted from the source; the other two match the captured screen.</p>
+        </div>
+        <div class="ev ev--right ev--pair ev--chat">
+          <div class="chat" aria-live="polite">
+            <div class="chat-head"><img src="assets/img/brand/esugid-logo-192.png" alt="" width="36" height="36"><div><b>E-SUGID Assistant</b><span>Intelligent Municipal &amp; Barangay Guide</span></div><em class="chat-local">local quick answer</em></div>
+            <div class="chat-log" data-chat-log></div>
+          </div>
+          <figure class="device phone" data-screen="assistant">
+            <div class="phone-shell"><div class="phone-screen">
+              <img src="assets/img/screens/mobile/assistant-quick-answers-and-navigation.jpg" width="1080" height="2460" alt="E-SUGID Assistant chat answering Can I submit a concern here? with an Open Concern button, and Where can I find the hotlines? with an Open Hotlines button." loading="lazy">
+            </div></div>
+            <figcaption><b>Captured</b> · local quick answers</figcaption>
+          </figure>
+        </div>
+      </article>
+      <article class="beat" data-shot="assistant-bounds">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-cpu"/></svg>How it answers</p>
+          <h3>Guidance — not decisions.</h3>
+          <p>The three quick inquiries are answered <b>on the phone</b>, without a network call. Other questions go to a Cloud Function that calls <b>Google's Gemini API</b> with a server-side key, applies a rate limit, and only offers actions the user's role allows.</p>
+          <p class="pending-line"><svg><use href="#i-pending"/></svg>A verified cloud-generated answer has not been captured yet.</p>
+        </div>
+        <div class="ev">
+          <div class="bounds">
+            <div class="bounds-col bounds-col--yes">
+              <h4><svg><use href="#i-check"/></svg>The assistant can</h4>
+              <ul>
+                <li>Answer the quick inquiries locally</li>
+                <li>Answer other questions through the cloud function</li>
+                <li>Offer a button to an existing screen</li>
+                <li>Reply in English or Bisaya for the quick inquiries</li>
+              </ul>
+            </div>
+            <div class="bounds-col bounds-col--no">
+              <h4><svg><use href="#i-close"/></svg>It does not</h4>
+              <ul>
+                <li>Submit concerns for the resident</li>
+                <li>Approve residents or staff</li>
+                <li>Decide complaints</li>
+                <li>Dispatch responders</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Assistant (≈50 s).</b> Press → to replay the three quick inquiries. Optionally click "Open Concern" to show navigation — then press G to come back.</p>
+    <p>Be precise: these three are local answers; other questions use Gemini through a Cloud Function. A cloud answer has not been captured — don't imply it was.</p>
+  </template>
+</section>
+
+<!-- ═════════ 10 STAFF ═════════ -->
+<section class="chapter" id="staff" data-title="The staff side" data-short="Staff" data-time="100">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">10</span><h2>The staff side</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="staff-console">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-monitor"/></svg>Staff dashboard · Barangay Captain, Vito</p>
+          <h3>One console, scoped to the user's role.</h3>
+          <div class="step-panels" data-panels="console">
+            <p data-panel="dashboard"><b>Dashboard</b> — barangay activity (concerns received and resolved), top concern categories, pending verifications.</p>
+            <p data-panel="concerns"><b>Concerns</b> — resident reports by status and category.</p>
+            <p data-panel="announcements"><b>Announcements</b> — published, scheduled, drafts and archive, each with its recipients.</p>
+            <p data-panel="emergencies"><b>Emergencies</b> — active and resolved alerts; send an alert to the barangay.</p>
+            <p data-panel="verification"><b>Resident Verification</b> — pending, verified, needs attention, rejected.</p>
+            <p data-panel="team"><b>Barangay Team</b> — officials and requests for new official accounts, which LGU IT approves.</p>
+          </div>
+          <p class="fine">Use the sidebar or press → to tour. Complaints are omitted (personal details).</p>
+        </div>
+        <div class="ev ev--wide ev--console">
+          <div class="console">
+            <nav class="console-nav stepper" data-stepper="console" role="tablist" aria-label="Dashboard pages">
+              <button type="button" role="tab" data-step="dashboard" title="Dashboard"><svg><use href="#i-chart"/></svg><span>Dashboard</span></button>
+              <button type="button" role="tab" data-step="concerns" title="Concerns"><svg><use href="#i-file"/></svg><span>Concerns</span></button>
+              <button type="button" role="tab" data-step="announcements" title="Announcements"><svg><use href="#i-megaphone"/></svg><span>Announcements</span></button>
+              <button type="button" role="tab" data-step="emergencies" title="Emergencies"><svg><use href="#i-siren"/></svg><span>Emergencies</span></button>
+              <button type="button" role="tab" data-step="verification" title="Verification"><svg><use href="#i-id"/></svg><span>Verification</span></button>
+              <button type="button" role="tab" data-step="team" title="Team"><svg><use href="#i-users"/></svg><span>Team</span></button>
+            </nav>
+            <figure class="device browser" data-step-screen="console">
+              <div class="browser-shell"><div class="browser-bar"><i></i><i></i><i></i><span>E-SUGID staff dashboard · Barangay Captain</span></div><div class="browser-screen browser-screen--swap">
+                <img data-panel="dashboard" data-screen="a-dashboard" src="assets/img/screens/admin/barangay-dashboard.png" width="1423" height="764" alt="Barangay dashboard: Barangay Activity chart of concerns received and resolved over seven days, Vito Concern Overview of top categories, and Pending Verifications." loading="lazy">
+                <img data-panel="concerns" data-screen="a-concerns" src="assets/img/screens/admin/concerns-active-category-summary.png" width="1424" height="761" alt="Concerns: Resident Reports by status and category." loading="lazy">
+                <img data-panel="announcements" data-screen="a-announcements" src="assets/img/screens/admin/announcements-published-list.png" width="1424" height="761" alt="Announcements: published list with recipients, senders and status." loading="lazy">
+                <img data-panel="emergencies" data-screen="a-emergencies" src="assets/img/screens/admin/emergency-alerts-all-clear.png" width="1439" height="762" alt="Emergency Alerts: live page with no active alerts and a Send Emergency Alert to Barangay Vito button." loading="lazy">
+                <img data-panel="verification" data-screen="a-verification" src="assets/img/screens/admin/resident-verification-empty-pending-queue.png" width="1439" height="761" alt="Resident Verification with an empty pending queue." loading="lazy">
+                <img data-panel="team" data-screen="a-team" src="assets/img/screens/admin/barangay-team-directory.png" width="1439" height="762" alt="Barangay Team: officials, requests waiting for approval, archived, and a Request New Official button." loading="lazy">
+              </div></div>
+              <figcaption><b>Staff dashboard</b> · Barangay Captain view</figcaption>
+            </figure>
+          </div>
+        </div>
+      </article>
+      <article class="beat" data-shot="staff-roles">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-key"/></svg>Roles and boundaries</p>
+          <h3>Each role works within its boundary.</h3>
+          <div class="stepper role-picker" data-stepper="role" role="tablist" aria-label="Staff role">
+            <button type="button" role="tab" data-step="captain">Barangay Captain</button>
+            <button type="button" role="tab" data-step="councilor">Councilor</button>
+            <button type="button" role="tab" data-step="lgu">LGU Department</button>
+            <button type="button" role="tab" data-step="org">Organization</button>
+            <button type="button" role="tab" data-step="it">LGU IT</button>
+          </div>
+          <p class="fine">Role defaults from the project documentation. LGU IT can adjust capabilities, but department, organization and barangay boundaries remain. Captured screens show the Barangay Captain only.</p>
+        </div>
+        <div class="ev ev--right ev--matrix">
+          <div class="matrix step-panels" data-panels="role">
+            <dl data-panel="captain"><dt>Concerns</dt><dd>Sent to own barangay</dd><dt>Emergency reports</dt><dd>Own barangay</dd><dt>Announcements</dt><dd>Own barangay</dd><dt>Resident verification</dt><dd>Own barangay; may delegate</dd><dt>Staff accounts</dt><dd>Requests for own barangay (IT approves)</dd></dl>
+            <dl data-panel="councilor"><dt>Concerns</dt><dd class="no">No</dd><dt>Emergency reports</dt><dd>Own barangay</dd><dt>Announcements</dt><dd>As kagawad, own barangay</dd><dt>Resident verification</dt><dd>Only when delegated</dd><dt>Staff accounts</dt><dd class="no">No</dd></dl>
+            <dl data-panel="lgu"><dt>Concerns</dt><dd>Assigned department</dd><dt>Emergency reports</dt><dd class="no">No</dd><dt>Announcements</dt><dd>Department identity; any audience</dd><dt>Resident verification</dt><dd class="no">No</dd><dt>Staff accounts</dt><dd>Requests for same department (IT approves)</dd></dl>
+            <dl data-panel="org"><dt>Concerns</dt><dd>Assigned organization</dd><dt>Emergency reports</dt><dd>Routed agency only</dd><dt>Announcements</dt><dd>Approved service area</dd><dt>Private dispatch</dt><dd>Send and receive</dd><dt>Staff accounts</dt><dd>Requests for same organization (IT approves)</dd></dl>
+            <dl data-panel="it"><dt>Concerns</dt><dd>Those sent to LGU IT</dd><dt>Emergency reports</dt><dd>All</dd><dt>Announcements</dt><dd>Department identity; any audience</dd><dt>Resident verification</dt><dd>Municipality oversight</dd><dt>Staff accounts</dt><dd>Creates directly; approves requests</dd></dl>
+          </div>
+          <p class="matrix-foot"><svg><use href="#i-lock"/></svg>Interface visibility is only a usability layer — Firestore and Storage security rules enforce access independently.</p>
+        </div>
+      </article>
+      <article class="beat" data-shot="staff-records">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-chart"/></svg>Reports &amp; logs</p>
+          <h3>Operations stay on record.</h3>
+          <div class="stepper chips" data-stepper="records" role="tablist" aria-label="Records">
+            <button type="button" role="tab" data-step="reports">Operational Summary</button>
+            <button type="button" role="tab" data-step="logs">System Logs</button>
+          </div>
+          <p>An <b>Operational Summary</b> by period — concerns, verification, announcements and alerts — with export. <b>System Logs</b> record actions and official sign-ins.</p>
+          <p class="fine">These counts are application records, not thesis results.</p>
+        </div>
+        <div class="ev ev--wide">
+          <figure class="device browser" data-step-screen="records">
+            <div class="browser-shell"><div class="browser-bar"><i></i><i></i><i></i><span>E-SUGID staff dashboard · Barangay Captain</span></div><div class="browser-screen browser-screen--swap">
+              <img data-panel="reports" data-screen="a-reports" src="assets/img/screens/admin/barangay-operational-report.png" width="1439" height="763" alt="Reports: Operational Summary for the last 30 days with resident concerns, resident verification, barangay announcements and emergency alerts, and Export Report." loading="lazy">
+              <img data-panel="logs" data-screen="a-logs" src="assets/img/screens/admin/barangay-system-logs.png" width="1439" height="763" alt="System Logs: operations log with dated entries for concerns resolved and submitted, resident verified and announcement published." loading="lazy">
+            </div></div>
+            <figcaption><b>Staff dashboard</b> · Reports &amp; System Logs</figcaption>
+          </figure>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Staff side (≈1:40).</b> Tour the console with → : Dashboard, Concerns, Announcements, Emergencies, Verification, Team. Mention every capture is the Barangay Captain of Vito.</p>
+    <p>Roles: press → through Captain, Councilor, LGU Department, Organization, LGU IT — the map shows each scope. Stress that security rules enforce boundaries, not just the UI.</p>
+    <p>Records: reports and logs support accountability. They are not evaluation results.</p>
+  </template>
+</section>
+
+<!-- ═════════ 11 ARCHITECTURE ═════════ -->
+<section class="chapter chapter--paper" id="architecture" data-title="How it is built" data-short="Architecture" data-time="70">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">11</span><h2>How it is built</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="arch">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-layers"/></svg>Architecture</p>
+          <h3>Two clients, one Firebase backend.</h3>
+          <div class="stepper chips" data-stepper="flow" role="tablist" aria-label="Data flow">
+            <button type="button" role="tab" data-step="concern">Concern</button>
+            <button type="button" role="tab" data-step="announce">Announcement</button>
+            <button type="button" role="tab" data-step="alert">Emergency alert</button>
+            <button type="button" role="tab" data-step="assist">Assistant</button>
+          </div>
+          <div class="step-panels" data-panels="flow">
+            <ol data-panel="concern"><li>The app calls <code>submitConcern</code>.</li><li>The function validates and writes the case to Firestore.</li><li>The dashboard lists it for the receiving office.</li><li>Staff updates are written back; the resident sees the status.</li></ol>
+            <ol data-panel="announce"><li>Staff publish from the dashboard (now or scheduled).</li><li>Firestore stores it with its audience.</li><li>A trigger delivers notifications through Cloud Messaging.</li><li>Event posts sync to the calendar.</li></ol>
+            <ol data-panel="alert"><li>Staff call <code>publishEmergencyAlert</code>.</li><li>The alert is stored for its barangay audience.</li><li>A trigger sends the broadcast via Cloud Messaging.</li><li>Residents can acknowledge in the app.</li></ol>
+            <ol data-panel="assist"><li>Quick inquiries are answered on the phone.</li><li>Other questions call <code>askESugidAssistant</code>.</li><li>The function retrieves grounding records and calls Gemini.</li><li>Only role-allowed navigation actions are returned.</li></ol>
+          </div>
+        </div>
+        <div class="ev ev--diagram">
+          <div class="arch" data-arch>
+            <div class="arch-col">
+              <div class="arch-node" data-n="app"><svg><use href="#i-phone"/></svg><b>Resident app</b><span>Flutter · Android</span></div>
+              <div class="arch-node" data-n="web"><svg><use href="#i-monitor"/></svg><b>Staff dashboard</b><span>Web · static bundle</span></div>
+            </div>
+            <div class="arch-cloud">
+              <p class="arch-label">Firebase</p>
+              <div class="arch-node" data-n="auth"><svg><use href="#i-key"/></svg><b>Authentication</b></div>
+              <div class="arch-node" data-n="fn"><svg><use href="#i-server"/></svg><b>Cloud Functions</b><span>asia-southeast1</span></div>
+              <div class="arch-node" data-n="db"><svg><use href="#i-database"/></svg><b>Cloud Firestore</b><span>+ security rules</span></div>
+              <div class="arch-node" data-n="store"><svg><use href="#i-file"/></svg><b>Cloud Storage</b><span>+ security rules</span></div>
+              <div class="arch-node" data-n="fcm"><svg><use href="#i-bell"/></svg><b>Cloud Messaging</b></div>
+            </div>
+            <div class="arch-col arch-col--ext">
+              <p class="arch-label">External services</p>
+              <div class="arch-node" data-n="gemini"><svg><use href="#i-sparkles"/></svg><b>Gemini API</b><span>assistant</span></div>
+              <div class="arch-node" data-n="meteo"><svg><use href="#i-cloud"/></svg><b>Open-Meteo</b><span>weather</span></div>
+              <div class="arch-node" data-n="maps"><svg><use href="#i-map"/></svg><b>Google Maps</b><span>map &amp; navigation</span></div>
+              <div class="arch-node" data-n="mail"><svg><use href="#i-mail"/></svg><b>Brevo</b><span>e-mail OTP</span></div>
+            </div>
+            <svg class="arch-wires" aria-hidden="true"></svg>
+          </div>
+        </div>
+      </article>
+      <article class="beat" data-shot="arch-security">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-lock"/></svg>Access and integrity</p>
+          <h3>Rules are enforced on the server.</h3>
+          <ul class="ticks">
+            <li>Staff accounts are created by trusted Cloud Functions; the public client can create <b>resident profiles only</b>.</li>
+            <li><b>Firestore and Storage security rules</b> enforce role and entity boundaries, independent of the interface.</li>
+            <li>API keys for Gemini and e-mail stay as <b>server-side secrets</b>.</li>
+          </ul>
+          <p class="fine">Describes implemented controls; this is not an independent security certification.</p>
+        </div>
+        <div class="ev">
+          <div class="test-assets">
+            <p class="ta-title"><svg><use href="#i-flask"/></svg>Test assets present in the source</p>
+            <div class="ta-grid">
+              <div><b>73</b><span>Flutter test files</span></div>
+              <div><b>2</b><span>security-rules test suites<br>(Firestore, Storage)</span></div>
+              <div><b>13</b><span>dashboard browser specs<br>(Playwright)</span></div>
+            </div>
+            <p class="pending-line"><svg><use href="#i-pending"/></svg>Counts are files in the codebase — not pass rates. Report actual runs and results in Chapter 12.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Architecture (≈1:10).</b> Two clients, one backend. Press → to trace each flow; the diagram highlights the path.</p>
+    <p>Security: server-side account creation, security rules as the real boundary, secrets server-side.</p>
+    <p>Test assets exist; don't quote pass rates unless you've run and recorded them.</p>
+  </template>
+</section>
+
+<!-- ═════════ 12 EVALUATION ═════════ -->
+<section class="chapter chapter--paper" id="evaluation" data-title="How it was evaluated" data-short="Evaluation" data-time="60">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">12</span><h2>How it was evaluated</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="evaluation">
+        <div class="copy">
+          <p class="kicker"><svg><use href="#i-flask"/></svg>Method &amp; findings</p>
+          <h3>Results will appear here once supplied.</h3>
+          <p>This chapter is reserved for the approved method, instruments, participants, findings and limitations. Nothing is shown in advance: <b>no figures have been invented</b>.</p>
+          <p class="fine">Distinguish development tests from user evaluation. State sample sizes and what each measure means.</p>
+        </div>
+        <div class="ev">
+          <table class="eval">
+            <thead><tr><th scope="col">Assessment</th><th scope="col">Method</th><th scope="col">Participants</th><th scope="col">Result</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Functional workflow tests</th><td><span class="tbd">Pending</span></td><td><span class="tbd">—</span></td><td><span class="tbd">Pending</span></td></tr>
+              <tr><th scope="row">Resident evaluation</th><td><span class="tbd">Pending</span></td><td><span class="tbd">Pending</span></td><td><span class="tbd">Pending</span></td></tr>
+              <tr><th scope="row">Staff evaluation</th><td><span class="tbd">Pending</span></td><td><span class="tbd">Pending</span></td><td><span class="tbd">Pending</span></td></tr>
+              <tr><th scope="row">Usability · performance · security <small>(if conducted)</small></th><td><span class="tbd">Pending</span></td><td><span class="tbd">Pending</span></td><td><span class="tbd">Pending</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Evaluation (≈1 min).</b> Replace this chapter's table with the approved results before the defense. If evaluation is incomplete, say what was done, what is pending and why.</p>
+  </template>
+</section>
+
+<!-- ═════════ 13 CONCLUSION ═════════ -->
+<section class="chapter" id="conclusion" data-title="Conclusion" data-short="Conclusion" data-time="30">
+  <div class="stage">
+    <header class="ch-head"><span class="ch-num">13</span><h2>Conclusion</h2></header>
+    <div class="beats">
+      <article class="beat" data-shot="conclusion">
+        <div class="copy">
+          <p class="kicker">Contribution</p>
+          <h3>One shared system for Barili's information — and its conversations.</h3>
+          <p>Official announcements with intended audiences, concerns routed to the office that handles them, and staff work scoped by role — in one Android app and one web dashboard over one record.</p>
+        </div>
+        <div class="ev">
+          <div class="wrap-grid">
+            <div class="wrap-card">
+              <h4><svg><use href="#i-check"/></svg>Implementation shown</h4>
+              <ul><li>Resident app and staff dashboard (Obj. 2)</li><li>Targeted announcements and alerts (Obj. 3)</li><li>Concerns with status; separate complaints (Obj. 4)</li><li>Verification and role scoping (Obj. 5)</li><li>Services hub, local tools, assistant (Obj. 6)</li></ul>
+            </div>
+            <div class="wrap-card wrap-card--pending">
+              <h4><svg><use href="#i-pending"/></svg>Evidence pending</h4>
+              <ul><li>Requirements evidence (Obj. 1)</li><li>Evaluation results (Obj. 7)</li><li>One matched end-to-end case capture</li><li>A verified cloud assistant answer</li></ul>
+            </div>
+            <div class="wrap-card wrap-card--limits">
+              <h4><svg><use href="#i-alert"/></svg>Current limits</h4>
+              <ul><li>Offline use is limited to saved announcements</li><li>Maps, weather and cloud answers need connectivity</li><li>No payments; no guaranteed emergency response</li><li>Future work — <em>to be added by the team</em></li></ul>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="beat" data-shot="finale">
+        <div class="copy copy--finale">
+          <p class="kicker">Salamat · Thank you</p>
+          <h3 class="finale-title">Questions are welcome.</h3>
+          <p>Jump straight to any topic:</p>
+          <div class="qa-index">
+            <a href="#concern" data-go="concern">Concern handling</a>
+            <a href="#announce" data-go="announce">Audiences</a>
+            <a href="#safety" data-go="safety">Emergency alerts</a>
+            <a href="#staff" data-go="staff" data-beat="1">Role access</a>
+            <a href="#assistant" data-go="assistant" data-beat="1">AI boundaries</a>
+            <a href="#architecture" data-go="architecture">Architecture</a>
+            <a href="#evaluation" data-go="evaluation">Evaluation</a>
+            <button type="button" data-action="library">All screens ›</button>
+          </div>
+          <p class="pending-line"><svg><use href="#i-pending"/></svg>Team, adviser and acknowledgments — to be added.</p>
+        </div>
+        <div class="ev ev--world"></div>
+      </article>
+    </div>
+  </div>
+  <template class="ch-notes">
+    <p><b>Close (≈30 s).</b> One sentence of contribution, one of limitations, thank the panel.</p>
+    <p>For Q&amp;A use the topic links, G (chapters) or L (library of every screen). Each screenshot opens full size.</p>
+  </template>
+</section>
+
+</main>
+
+<footer class="credits" id="credits">
+  <div class="credits-inner">
+    <img src="assets/img/brand/esugid-logo-192.png" alt="E-SUGID logo" width="64" height="64">
+    <div>
+      <p><b>E-sugid</b> — Design and Development of a Centralized Community Communication and Information Dissemination System.</p>
+      <p>Screens are unaltered captures of the E-SUGID Android app and staff dashboard (Barangay Captain role) using test data. Barangay boundaries: Philippine Statistics Authority (PSA) 2020 administrative layer via GeoRisk Philippines, as included in the app. The 3D map's relief, buildings and connection lines are illustrative. Fonts: Outfit (SIL OFL) and Roboto Mono (Apache 2.0). 3D: three.js r180 (MIT). Icons: Lucide (ISC). This presentation works offline and does not connect to the live app backend.</p>
+      <p class="pending-line"><svg><use href="#i-pending"/></svg>Logo, location and screenshot credits/permissions — to be confirmed by the team.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Defense HUD -->
+<div class="hud" id="hud" hidden>
+  <button class="hud-btn" type="button" data-action="prev" title="Previous (←)"><svg><use href="#i-arrow-left"/></svg></button>
+  <div class="hud-mid">
+    <div class="hud-title"><span id="hud-num">00</span><b id="hud-chapter">Opening</b><span id="hud-beat"></span></div>
+    <div class="hud-bar"><i id="hud-progress"></i></div>
+  </div>
+  <div class="hud-time" id="hud-time" title="Elapsed · planned (T resets)"><svg><use href="#i-timer"/></svg><b id="hud-elapsed">0:00</b><span id="hud-plan">/ 13:40</span></div>
+  <button class="hud-btn" type="button" data-action="notes" title="Presenter notes (N)"><svg><use href="#i-notes"/></svg></button>
+  <button class="hud-btn" type="button" data-action="next" title="Next (→)"><svg><use href="#i-arrow-right"/></svg></button>
+</div>
+
+<aside class="notes" id="notes" hidden aria-label="Presenter notes">
+  <div class="notes-head"><b id="notes-title">Notes</b><span id="notes-time"></span><button type="button" class="icon-btn" data-action="notes" aria-label="Close notes"><svg><use href="#i-close"/></svg></button></div>
+  <div class="notes-body" id="notes-body"></div>
+  <p class="notes-foot">Hidden from the audience until you press <kbd>N</kbd>. For a second screen, press <kbd>W</kbd> to open the presenter window.</p>
+</aside>
+
+<!-- Dialogs -->
+<dialog class="sheet" id="dlg-chapters" aria-labelledby="dlg-chapters-title">
+  <div class="sheet-head"><h2 id="dlg-chapters-title">Chapters</h2><span class="sheet-sub" id="chapters-total"></span><button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></div>
+  <ol class="chapter-list" id="chapter-list"></ol>
+</dialog>
+
+<dialog class="sheet sheet--wide" id="dlg-library" aria-labelledby="dlg-library-title">
+  <div class="sheet-head"><h2 id="dlg-library-title">Feature library</h2><span class="sheet-sub">Every screen in this presentation. Select one to view it full size.</span><button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></div>
+  <div class="lib-filters" role="group" aria-label="Filter screens">
+    <button type="button" class="chip is-on" data-filter="all">All</button>
+    <button type="button" class="chip" data-filter="mobile">Resident app</button>
+    <button type="button" class="chip" data-filter="admin">Staff dashboard</button>
+    <label class="lib-search"><svg><use href="#i-search"/></svg><input type="search" id="lib-q" placeholder="Search screens…" aria-label="Search screens"></label>
+  </div>
+  <div class="lib-grid" id="lib-grid"></div>
+</dialog>
+
+<dialog class="lightbox" id="dlg-shot" aria-labelledby="shot-title">
+  <div class="lb-stage"><img id="shot-img" alt=""></div>
+  <div class="lb-info">
+    <p class="kicker" id="shot-who"></p>
+    <h2 id="shot-title"></h2>
+    <p id="shot-desc"></p>
+    <p class="capture" id="shot-note"></p>
+    <p class="lb-src" id="shot-src"></p>
+    <div class="lb-actions">
+      <button type="button" class="btn btn--ghost btn--sm" data-lb="prev"><svg><use href="#i-arrow-left"/></svg>Previous</button>
+      <button type="button" class="btn btn--ghost btn--sm" data-lb="next">Next<svg><use href="#i-arrow-right"/></svg></button>
+      <button type="button" class="btn btn--ghost btn--sm" data-lb="zoom"><svg><use href="#i-zoom"/></svg>Actual size</button>
+      <button type="button" class="btn btn--ghost btn--sm" data-lb="goto"><svg><use href="#i-arrow-right"/></svg>Go to chapter</button>
+    </div>
+  </div>
+  <button type="button" class="icon-btn lb-close" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button>
+</dialog>
+
+<dialog class="sheet" id="dlg-help" aria-labelledby="dlg-help-title">
+  <div class="sheet-head"><h2 id="dlg-help-title">Presenting</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg><use href="#i-close"/></svg></button></div>
+  <div class="help-grid">
+    <dl>
+      <dt><kbd>→</kbd> <kbd>PgDn</kbd> <kbd>Space</kbd></dt><dd>Next step</dd>
+      <dt><kbd>←</kbd> <kbd>PgUp</kbd></dt><dd>Previous step</dd>
+      <dt><kbd>Home</kbd> <kbd>End</kbd></dt><dd>First / last chapter</dd>
+      <dt><kbd>1</kbd>–<kbd>9</kbd>, <kbd>0</kbd></dt><dd>Jump to chapter 1–9, 10</dd>
+      <dt><kbd>G</kbd></dt><dd>Chapter list</dd>
+      <dt><kbd>L</kbd></dt><dd>Feature library (all screens)</dd>
+    </dl>
+    <dl>
+      <dt><kbd>P</kbd></dt><dd>Start / stop defense mode</dd>
+      <dt><kbd>N</kbd></dt><dd>Presenter notes</dd>
+      <dt><kbd>W</kbd></dt><dd>Presenter window (second screen)</dd>
+      <dt><kbd>T</kbd></dt><dd>Reset timer</dd>
+      <dt><kbd>M</kbd></dt><dd>Motion: Full → Calm → Static</dd>
+      <dt><kbd>F</kbd> · <kbd>B</kbd></dt><dd>Fullscreen · Black screen</dd>
+      <dt><kbd>Esc</kbd></dt><dd>Close dialogs</dd>
+    </dl>
+  </div>
+  <p class="fine">Clickers that send Page Up/Down or arrow keys work. Static mode removes 3D and motion and shows every step in order — use it if the projector laptop struggles.</p>
+</dialog>
+
+<div class="blackout" id="blackout" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<noscript><style>.topbar .tools,.rail{display:none}</style></noscript>
+
+<script src="assets/js/data/screens.js"></script>
+<script src="assets/js/content.js"></script>
+<script src="assets/js/deck.js"></script>
+<script src="assets/js/data/barili.js" defer></script>
+<script src="assets/js/three.classic.js" defer></script>
+<script src="assets/js/data/textures.js" defer></script>
+<script src="assets/js/world.js" defer></script>
+</body>
+</html>

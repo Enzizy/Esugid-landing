@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E-sugid — Presenter</title>
+<link rel="icon" href="assets/img/brand/favicon.png">
+<style>
+  @font-face { font-family: 'Outfit'; src: url('assets/fonts/Outfit-Regular.ttf') format('truetype'); font-weight: 400; }
+  @font-face { font-family: 'Outfit'; src: url('assets/fonts/Outfit-SemiBold.ttf') format('truetype'); font-weight: 600; }
+  @font-face { font-family: 'Outfit'; src: url('assets/fonts/Outfit-Bold.ttf') format('truetype'); font-weight: 700; }
+  @font-face { font-family: 'Roboto Mono'; src: url('assets/fonts/RobotoMono-Medium.ttf') format('truetype'); font-weight: 500; }
+  :root { --night: #09150F; --surface: #14251D; --line: rgba(205,235,218,.16); --text: #F1F7F3; --text-2: #D3E2D9; --muted: #A8BCB0; --gold: #E6CB84; --mint: #2FD49B; --amber: #F0B04E; --danger: #F07C7C; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body { background: radial-gradient(60vmax 40vmax at 0% 0%, rgba(230,203,132,.12), transparent 60%), var(--night); color: var(--text); font-family: 'Outfit', system-ui, sans-serif; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); grid-template-rows: auto 1fr auto; gap: 16px; padding: 18px; }
+  .mono { font-family: 'Roboto Mono', monospace; letter-spacing: .1em; text-transform: uppercase; font-size: 12px; color: var(--gold); }
+  header { grid-column: 1 / -1; display: flex; align-items: center; gap: 18px; }
+  header img { width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(230,203,132,.5); }
+  header h1 { font-size: 18px; margin: 0; font-weight: 600; flex: 1; }
+  #link { font-size: 13px; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); }
+  #link.on { color: var(--mint); border-color: rgba(47,212,155,.5); }
+  .panel { background: rgba(20,37,29,.85); border: 1px solid var(--line); border-radius: 22px; padding: 20px 22px; min-height: 0; }
+  .now { display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .now h2 { margin: 0; font-size: clamp(26px, 3.4vw, 44px); line-height: 1.05; letter-spacing: -.02em; }
+  .now h3 { margin: 0; font-size: clamp(18px, 2vw, 26px); font-weight: 600; color: var(--text-2); }
+  #notes { flex: 1; overflow-y: auto; font-size: clamp(17px, 1.7vw, 23px); line-height: 1.5; color: var(--text-2); border-top: 1px solid var(--line); padding-top: 12px; margin-top: 4px; }
+  #notes p { margin: 0 0 12px; }
+  #notes b { color: var(--text); }
+  aside { display: flex; flex-direction: column; gap: 16px; min-height: 0; }
+  .timer b { display: block; font-size: clamp(48px, 7vw, 88px); font-weight: 700; letter-spacing: -.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .timer span { color: var(--muted); font-size: 15px; }
+  .timer.behind b { color: var(--amber); } .timer.over b { color: var(--danger); }
+  .bar { height: 6px; border-radius: 6px; background: rgba(255,255,255,.08); overflow: hidden; margin-top: 12px; position: relative; }
+  .bar i { position: absolute; inset: 0 auto 0 0; background: var(--mint); border-radius: 6px; }
+  .bar u { position: absolute; top: -3px; bottom: -3px; width: 2px; background: var(--gold); }
+  .next p { margin: 6px 0 0; font-size: 20px; font-weight: 600; }
+  ol { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1; min-height: 0; }
+  ol button { width: 100%; display: flex; gap: 10px; align-items: baseline; padding: 8px 10px; border: 0; border-radius: 10px; background: none; color: var(--text-2); font: inherit; font-size: 15px; text-align: left; cursor: pointer; }
+  ol button span:first-child { font-family: 'Roboto Mono', monospace; color: var(--gold); font-size: 12px; }
+  ol button span:last-child { margin-left: auto; color: var(--muted); font-family: 'Roboto Mono', monospace; font-size: 12px; }
+  ol button.cur { background: rgba(8,118,91,.3); color: var(--text); }
+  ol button:hover { background: rgba(255,255,255,.05); }
+  footer { grid-column: 1 / -1; display: flex; gap: 12px; align-items: center; }
+  footer button { height: 64px; padding: 0 26px; border-radius: 18px; border: 1px solid var(--line); background: rgba(255,255,255,.04); color: var(--text); font: inherit; font-size: 18px; font-weight: 600; cursor: pointer; }
+  footer .big { flex: 1; background: linear-gradient(180deg, #1BC28A, #0A7A58); border-color: rgba(152,255,214,.45); font-size: 22px; }
+  footer .hint { color: var(--muted); font-size: 13px; }
+  .wait { grid-column: 1 / -1; text-align: center; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <img src="assets/img/brand/esugid-logo-192.png" alt="">
+  <h1>E-sugid — presenter view <span class="mono" id="step"></span></h1>
+  <span id="link">waiting for the presentation window…</span>
+</header>
+<section class="panel now">
+  <span class="mono" id="num">—</span>
+  <h2 id="title">Open the presentation and press W</h2>
+  <h3 id="heading"></h3>
+  <div id="notes"><p>This window mirrors the main presentation. Keep it on your laptop screen; show the main window on the projector.</p></div>
+</section>
+<aside>
+  <div class="panel timer" id="timer"><span class="mono">Elapsed</span><b id="elapsed">0:00</b><span id="plan"></span><div class="bar"><i id="barNow"></i><u id="barPlan"></u></div></div>
+  <div class="panel next"><span class="mono">Next</span><p id="next">—</p></div>
+  <div class="panel" style="display:flex;flex-direction:column;min-height:0;flex:1"><span class="mono">Chapters</span><ol id="list"></ol></div>
+</aside>
+<footer>
+  <button type="button" data-cmd="prev">← Back</button>
+  <button type="button" class="big" data-cmd="next">Next →</button>
+  <button type="button" data-cmd="black" title="Black screen on the projector">Black</button>
+  <button type="button" data-cmd="reset">Reset timer</button>
+  <span class="hint">Keys here: → / ← / PgDn / PgUp · B black · T reset</span>
+</footer>
+<script>
+(function () {
+  'use strict';
+  var ch = null; try { ch = new BroadcastChannel('esugid-presenter'); } catch (e) {}
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (s) { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+  var last = null, base = 0, baseAt = 0;
+  function send(cmd, extra) {
+    var m = Object.assign({ type: 'cmd', cmd: cmd, id: Date.now() + '-' + Math.random().toString(36).slice(2) }, extra || {});
+    if (ch) ch.postMessage(m);
+    if (window.opener && !window.opener.closed) try { window.opener.postMessage(m, '*'); } catch (e) {}
+  }
+  function onMsg(e) {
+    var m = e.data || {};
+    if (m.type === 'tick') { base = m.elapsed; baseAt = Date.now(); return; }
+    if (m.type !== 'state') return;
+    last = m; base = m.elapsed; baseAt = Date.now();
+    $('link').textContent = 'connected'; $('link').className = 'on';
+    $('num').textContent = String(m.chapter).padStart(2, '0') + ' · ' + fmt(m.time) + ' planned';
+    $('title').textContent = m.title;
+    $('heading').textContent = m.heading !== m.title ? m.heading : '';
+    $('step').textContent = m.beats > 1 ? ' · step ' + (m.beat + 1) + '/' + m.beats : '';
+    $('notes').innerHTML = m.notes || '<p>No notes for this chapter.</p>';
+    $('next').textContent = m.next;
+    var list = $('list'); list.innerHTML = '';
+    m.list.forEach(function (c, i) {
+      var li = document.createElement('li'), b = document.createElement('button');
+      b.type = 'button'; b.className = i === m.chapter ? 'cur' : '';
+      b.innerHTML = '<span>' + String(i).padStart(2, '0') + '</span><span>' + c.title + '</span><span>' + fmt(c.time) + '</span>';
+      b.onclick = function () { send('goto', { chapter: i, beat: 0 }); };
+      li.appendChild(b); list.appendChild(li);
+    });
+    var cur = list.querySelector('.cur'); if (cur) cur.scrollIntoView({ block: 'nearest' });
+    paint();
+  }
+  if (ch) ch.onmessage = onMsg;
+  window.addEventListener('message', function (e) { if (window.opener && e.source === window.opener) onMsg(e); });
+  function paint() {
+    if (!last) return;
+    var e = base + (last.present ? (Date.now() - baseAt) / 1000 : 0);
+    $('elapsed').textContent = fmt(e);
+    $('plan').textContent = 'planned ' + fmt(last.total) + ' · this chapter should end by ' + fmt(last.planEnd);
+    var t = $('timer'); t.classList.toggle('behind', e > last.planEnd + 20 && e <= last.total); t.classList.toggle('over', e > last.total);
+    $('barNow').style.width = Math.min(100, 100 * e / last.total) + '%';
+    $('barPlan').style.left = (100 * last.planEnd / last.total) + '%';
+  }
+  setInterval(paint, 500);
+  document.querySelectorAll('[data-cmd]').forEach(function (b) { b.addEventListener('click', function () { send(b.dataset.cmd); }); });
+  document.addEventListener('keydown', function (e) {
+    var k = e.key;
+    if (k === 'ArrowRight' || k === 'PageDown' || k === ' ' || k === 'ArrowDown') { e.preventDefault(); send('next'); }
+    else if (k === 'ArrowLeft' || k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); send('prev'); }
+    else if (k === 'b' || k === 'B' || k === '.') send('black');
+    else if (k === 't' || k === 'T') send('reset');
+  });
+  send('hello');
+  setTimeout(function () { if (!last) send('hello'); }, 800);
+})();
+</script>
+</body>
+</html>

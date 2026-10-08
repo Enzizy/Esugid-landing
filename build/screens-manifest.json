@@ -1,0 +1,290 @@
+{
+  "home": {
+    "src": "assets/img/screens/mobile/home-announcement-overview.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/03-home-services/home-announcement-overview.jpg",
+    "thumb": "assets/img/thumbs/home.jpg",
+    "sha256": "950afbd1211317cee1265c493afb55dffa1beb28770d4e990475da9f451e6233"
+  },
+  "services": {
+    "src": "assets/img/screens/mobile/services-hub.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/03-home-services/services-hub.jpg",
+    "thumb": "assets/img/thumbs/services.jpg",
+    "sha256": "cefe895bc15993eeb07698daf1510ff1cfd873991e171c90eb5b8393d82c8ed0"
+  },
+  "concern-center": {
+    "src": "assets/img/screens/mobile/concern-center.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/04-concerns/concern-center.jpg",
+    "thumb": "assets/img/thumbs/concern-center.jpg",
+    "sha256": "e68ce9fd3bb15baf3db8837a7fac0274c80a6a4699151381e2ed0c9b99cd5b6e"
+  },
+  "concern-recipient": {
+    "src": "assets/img/screens/mobile/select-recipient-type.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/04-concerns/select-recipient-type.jpg",
+    "thumb": "assets/img/thumbs/concern-recipient.jpg",
+    "sha256": "61940c16fdb8fce045c767fb209a7227ededa2ad9c01aaf4d2f9b5a820e7f136"
+  },
+  "concern-mine": {
+    "src": "assets/img/screens/mobile/my-concerns-in-progress.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/04-concerns/my-concerns-in-progress.jpg",
+    "thumb": "assets/img/thumbs/concern-mine.jpg",
+    "sha256": "622045f58abd2f8e6c980f3724df0472f432dc7592b12e6b8d2e24634e9f0f4d"
+  },
+  "concern-board": {
+    "src": "assets/img/screens/mobile/barangay-public-reports.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/04-concerns/barangay-public-reports.jpg",
+    "thumb": "assets/img/thumbs/concern-board.jpg",
+    "sha256": "76650ca8c15711986f3aea32bca0652b0cd3e2765f11734e3bcd691c490f0efe"
+  },
+  "complaint-form": {
+    "src": "assets/img/screens/mobile/complaint-form.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/05-complaints/complaint-form.jpg",
+    "thumb": "assets/img/thumbs/complaint-form.jpg",
+    "sha256": "cb9112ec095e8e2b7bfd8d139f483049c4a85689b25968d7a7ab2990aad99f6d"
+  },
+  "updates-feed": {
+    "src": "assets/img/screens/mobile/community-updates-feed.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/06-announcements/community-updates-feed.jpg",
+    "thumb": "assets/img/thumbs/updates-feed.jpg",
+    "sha256": "b0f7a1daf1acedfb89e249ebaa6515bfc9808542caccabb1e555315198c13433"
+  },
+  "calendar": {
+    "src": "assets/img/screens/mobile/calendar-upcoming-event.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/07-calendar/calendar-upcoming-event.jpg",
+    "thumb": "assets/img/thumbs/calendar.jpg",
+    "sha256": "05be38592dfabf9935c6ad9e5bdb4c6a475c0af34d0869dd0a4c39517edf2bf2"
+  },
+  "emergency-center": {
+    "src": "assets/img/screens/mobile/emergency-center-all-clear.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/08-emergencies/emergency-center-all-clear.jpg",
+    "thumb": "assets/img/thumbs/emergency-center.jpg",
+    "sha256": "f565123f7d3b53ac297368877f6b16d3d0a8897f109f0722bf61179c44b89714"
+  },
+  "hotlines": {
+    "src": "assets/img/screens/mobile/emergency-hotlines.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/08-emergencies/emergency-hotlines.jpg",
+    "thumb": "assets/img/thumbs/hotlines.jpg",
+    "sha256": "99ec6bcd7cd44f733b31e02779421ac47c34c1d0d4b859ad6ad66b38aa843767"
+  },
+  "bayanihan": {
+    "src": "assets/img/screens/mobile/help-requests-feed.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/09-bayanihan/help-requests-feed.jpg",
+    "thumb": "assets/img/thumbs/bayanihan.jpg",
+    "sha256": "ae24feff26f4cade2593e32537d3a5e85c3575e7fc5d7b8710feedccdc223b8b"
+  },
+  "market": {
+    "src": "assets/img/screens/mobile/market-listings-feed.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/10-local-market/market-listings-feed.jpg",
+    "thumb": "assets/img/thumbs/market.jpg",
+    "sha256": "51ebdf2d3e973568034dcf37d00772d77ddb656bba89245ae3a5f5619121808c"
+  },
+  "map": {
+    "src": "assets/img/screens/mobile/barangay-map-current-location.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/11-map/barangay-map-current-location.jpg",
+    "thumb": "assets/img/thumbs/map.jpg",
+    "sha256": "a52fc2265310a13a8e26483b197c287c9e619dce3b7c6c08eaba27718fdc608e"
+  },
+  "explore": {
+    "src": "assets/img/screens/mobile/explore-barili-destinations.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/12-explore-directions/explore-barili-destinations.jpg",
+    "thumb": "assets/img/thumbs/explore.jpg",
+    "sha256": "393c34b6bac3a14757c235f2d4c2cbf1dde9948b34f1604b5717953b62e85295"
+  },
+  "navigation": {
+    "src": "assets/img/screens/mobile/mantayupan-motorcycle-navigation.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/12-explore-directions/mantayupan-motorcycle-navigation.jpg",
+    "thumb": "assets/img/thumbs/navigation.jpg",
+    "sha256": "f4e1abb17b0d6afce116cf9131d20cd424831c7177f5d38c18bbe799f396278d"
+  },
+  "weather": {
+    "src": "assets/img/screens/mobile/current-weather-and-forecast.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/13-weather/current-weather-and-forecast.jpg",
+    "thumb": "assets/img/thumbs/weather.jpg",
+    "sha256": "9e078b483f73500977f88c2bf0386a6b7d1c8a529d95ceb7edb4aec9f4941b5e"
+  },
+  "officials": {
+    "src": "assets/img/screens/mobile/municipal-officials.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/14-officials-organizations/municipal-officials.jpg",
+    "thumb": "assets/img/thumbs/officials.jpg",
+    "sha256": "bda97307cd319e57c84dbcaa40e53f177fc092b3987b08b3ccdc994a310e52c4"
+  },
+  "barangay-feed": {
+    "src": "assets/img/screens/mobile/my-barangay-announcements.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/14-officials-organizations/my-barangay-announcements.jpg",
+    "thumb": "assets/img/thumbs/barangay-feed.jpg",
+    "sha256": "e7adad16b98014d820c7390645225f1889b63f024aead2677699df1ad97f1ce8"
+  },
+  "assistant": {
+    "src": "assets/img/screens/mobile/assistant-quick-answers-and-navigation.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/15-ai-assistant/assistant-quick-answers-and-navigation.jpg",
+    "thumb": "assets/img/thumbs/assistant.jpg",
+    "sha256": "801b9e1e5951559ca3b8a77e62b0b6e94eb3b012a254d14a31df5439e2efae6f"
+  },
+  "carabao": {
+    "src": "assets/img/screens/mobile/carabao-runner-start.jpg",
+    "w": 1080,
+    "h": 2460,
+    "group": "mobile",
+    "origin": "assets/screenshots/mobile/18-carabao-game/carabao-runner-start.jpg",
+    "thumb": "assets/img/thumbs/carabao.jpg",
+    "sha256": "e93468f4c7ae1f285e7b698c419b5299d297e30dce1f7ed49b60ba643eeb8dc6"
+  },
+  "a-dashboard": {
+    "src": "assets/img/screens/admin/barangay-dashboard.png",
+    "w": 1423,
+    "h": 764,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/01-dashboard/barangay-dashboard.png",
+    "thumb": "assets/img/thumbs/a-dashboard.jpg",
+    "sha256": "37b1923104d8967d253df74e239e4ddc900d248c645dd24922a2554a22d09cd0"
+  },
+  "a-concerns": {
+    "src": "assets/img/screens/admin/concerns-active-category-summary.png",
+    "w": 1424,
+    "h": 763,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/02-concerns/concerns-active-category-summary.png",
+    "thumb": "assets/img/thumbs/a-concerns.jpg",
+    "sha256": "d4ae0f14156acfa52741629d6b1a522a14777c7a0f4c2df679cae6bd78a4188f"
+  },
+  "a-alert-1": {
+    "src": "assets/img/screens/admin/alert-editor-step-01-category.png",
+    "w": 1439,
+    "h": 760,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/04-emergencies/alert-editor-step-01-category.png",
+    "thumb": "assets/img/thumbs/a-alert-1.jpg",
+    "sha256": "3d78450c1b98c5e97efa3f5d3d6346d93990d6ed384268d2d72cd84047a989f3"
+  },
+  "a-alert-2": {
+    "src": "assets/img/screens/admin/alert-editor-step-02-message.png",
+    "w": 1439,
+    "h": 761,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/04-emergencies/alert-editor-step-02-message.png",
+    "thumb": "assets/img/thumbs/a-alert-2.jpg",
+    "sha256": "0d7e742ddc6d6d8ef271cf72d56bccc3d068e1cb9e7634c8b0d204333cd92cc6"
+  },
+  "a-alert-3": {
+    "src": "assets/img/screens/admin/alert-editor-step-03-audience-schedule.png",
+    "w": 1439,
+    "h": 764,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/04-emergencies/alert-editor-step-03-audience-schedule.png",
+    "thumb": "assets/img/thumbs/a-alert-3.jpg",
+    "sha256": "e8dc966cf4403e6ed18772dd074fb11e879117378432952c383bbc1237780b59"
+  },
+  "a-emergencies": {
+    "src": "assets/img/screens/admin/emergency-alerts-all-clear.png",
+    "w": 1422,
+    "h": 762,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/04-emergencies/emergency-alerts-all-clear.png",
+    "thumb": "assets/img/thumbs/a-emergencies.jpg",
+    "sha256": "e3a0aa3dcbc081cbcc544e468d7dd66c2f905e4873d71ed9c0c947fe3e68a618"
+  },
+  "a-announcements": {
+    "src": "assets/img/screens/admin/announcements-published-list.png",
+    "w": 1424,
+    "h": 761,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/06-announcements/announcements-published-list.png",
+    "thumb": "assets/img/thumbs/a-announcements.jpg",
+    "sha256": "e61ca3f00e3469007810f7f42d21329596d9c135d4079b6381426f59b6d7d62a"
+  },
+  "a-verification": {
+    "src": "assets/img/screens/admin/resident-verification-empty-pending-queue.png",
+    "w": 1439,
+    "h": 761,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/07-resident-verification/resident-verification-empty-pending-queue.png",
+    "thumb": "assets/img/thumbs/a-verification.jpg",
+    "sha256": "0af0a781e7c3d33ebfb15f113cdeeb03f00d293028872495497514b3b061f223"
+  },
+  "a-team": {
+    "src": "assets/img/screens/admin/barangay-team-directory.png",
+    "w": 1439,
+    "h": 763,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/09-people/barangay-team-directory.png",
+    "thumb": "assets/img/thumbs/a-team.jpg",
+    "sha256": "780a06b2a0279e948baa87f7d786297a36ad71752eec1bd353a8df71dbdbc241"
+  },
+  "a-reports": {
+    "src": "assets/img/screens/admin/barangay-operational-report.png",
+    "w": 1439,
+    "h": 761,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/11-reports/barangay-operational-report.png",
+    "thumb": "assets/img/thumbs/a-reports.jpg",
+    "sha256": "5843de3c7b99b72d72ccd144a1e5510feb25ec09a023d85f9b18c94562e8be55"
+  },
+  "a-logs": {
+    "src": "assets/img/screens/admin/barangay-system-logs.png",
+    "w": 1423,
+    "h": 763,
+    "group": "admin",
+    "origin": "assets/screenshots/admin/12-system-logs/barangay-system-logs.png",
+    "thumb": "assets/img/thumbs/a-logs.jpg",
+    "sha256": "949cb4eeb07d3d7daaf756ab83025dfa693ddd6160dcb82d02f8497a41b03db4"
+  }
+}

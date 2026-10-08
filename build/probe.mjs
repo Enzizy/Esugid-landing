@@ -1,0 +1,10 @@
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const { chromium } = require('C:/Users/joynoinc/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const browser = await chromium.launch({ executablePath: 'C:/Users/joynoinc/AppData/Local/ms-playwright/chromium-1243/chrome-win64/chrome.exe', args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
+const page = await browser.newPage({ viewport: { width: +(process.env.W || 1366), height: +(process.env.H || 768) } });
+await page.goto(process.env.URL || 'http://127.0.0.1:5180/?full=1', { waitUntil: 'load' });
+await page.waitForTimeout(1500);
+const out = await page.evaluate(process.argv[2]);
+console.log(JSON.stringify(out, null, 1));
+await browser.close();
