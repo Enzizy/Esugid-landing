@@ -1,4 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "outputDirectory": "dist"
+  "buildCommand": "rm -rf _site && mkdir -p _site/defense && cp -R landing/. _site/ && cp -R dist/. _site/defense/",
+  "outputDirectory": "_site"
 }

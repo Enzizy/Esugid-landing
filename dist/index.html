@@ -2,6 +2,10 @@
 <html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
+<script>
+  // On the website the presentation lives at /defense/; add the trailing slash so relative asset paths resolve.
+  if (location.pathname.slice(-8) === '/defense') location.replace(location.pathname + '/' + location.search + location.hash);
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>E-sugid — Thesis Defense</title>
 <meta name="description" content="E-sugid: Design and Development of a Centralized Community Communication and Information Dissemination System — an interactive thesis presentation for Barili, Cebu.">

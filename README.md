@@ -10,6 +10,15 @@ The 3D scene is Barili itself. All 42 barangays are extruded from the PSA 2020 b
 
 Real app and dashboard screenshots appear alongside the map in crisp HTML frames, never redrawn.
 
+## On the web
+
+| URL | What opens | Folder |
+| --- | --- | --- |
+| `https://e-sugid.vercel.app/` | Simple landing page about the project | `landing/` |
+| `https://e-sugid.vercel.app/defense/` | This interactive defense presentation | `dist/` |
+
+On each push, Vercel's build command (in `vercel.json`) copies `landing/` to the site root and `dist/` to `/defense/`. Locally the two folders stay separate. Open `landing/index.html` to view the landing page; its "Defense presentation" link then opens `dist/index.html`.
+
 ## Run it
 
 | Situation | What to do |
